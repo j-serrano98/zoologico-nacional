@@ -21,7 +21,7 @@ export default function Navbar() {
       <nav className="bg-safari-dark/80 backdrop-blur-md border border-white/10 px-6 py-3 rounded-full flex items-center justify-between shadow-lg">
         {/* Logo de Exploración */}
         <Link href="/" className="font-serif font-black text-xl text-safari-sand tracking-wider flex items-center gap-1">
-          SAFARI<span className="text-safari-sunset">.</span>
+          Zoologico Nacional<span className="text-safari-sunset">.</span>
         </Link>
 
         {/* Menú de Enlaces */}

@@ -2,7 +2,7 @@ import "./globals.css"; // 🔥 ¡DEBE SER LA LÍNEA 1!
 import Navbar from "./components/Navbar.jsx";
 
 export const metadata = {
-  title: "Safari Digital Zoo",
+  title: "Zoologico Nacional",
   description: "Explora la vida silvestre con calidad cinematográfica",
 };
 
