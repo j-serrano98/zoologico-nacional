@@ -19,14 +19,23 @@ export default function CameraViewfinder({ videoUrl }) {
       </div>
 
       {/* Reproductor de Video */}
-      <video 
-        src={videoUrl} 
-        autoPlay 
-        muted 
-        loop 
-        playsInline
-        className="w-full h-full object-cover opacity-90"
-      />
+      {videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be") ? (
+        <iframe 
+          src={`${videoUrl}?autoplay=1&mute=1&loop=1&playlist=${videoUrl.split('/').pop()}`}
+          className="w-full h-full object-cover border-0 opacity-90"
+          allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <video 
+          src={videoUrl} 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="w-full h-full object-cover opacity-90"
+        />
+      )}
 
       {/* Retícula de enfoque central */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none opacity-30布">
