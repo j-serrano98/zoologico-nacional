@@ -2,6 +2,32 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+// COMPONENTES DE ICONOS SVG LIMPIOS Y MINIMALISTAS
+const DietIcon = () => (
+  <svg className="w-6 h-6 text-safari-sunset" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+  </svg>
+);
+
+const StatusIcon = () => (
+  <svg className="w-6 h-6 text-safari-sunset" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+  </svg>
+);
+
+const WeightIcon = () => (
+  <svg className="w-6 h-6 text-safari-sunset" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18m0-18 4 4m-4-4-4 4m12 5H4M7 12l5 5 5-5" />
+  </svg>
+);
+
+const LocationIcon = () => (
+  <svg className="w-6 h-6 text-safari-sunset" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1 1 15 0Z" />
+  </svg>
+);
+
 export default function AnimalDetailAnimation({ animal, photos }) {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -14,6 +40,14 @@ export default function AnimalDetailAnimation({ animal, photos }) {
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   const appleEase = [0.16, 1, 0.3, 1];
+
+  // Mapeo estructurado vinculando las etiquetas a cada componente funcional de SVG
+  const specItems = [
+    { label: "Dieta", value: animal.diet, renderIcon: () => <DietIcon /> },
+    { label: "Estado", value: animal.conservation_status, renderIcon: () => <StatusIcon /> },
+    { label: "Peso Promedio", value: animal.weight, renderIcon: () => <WeightIcon /> },
+    { label: "Ubicación", value: animal.location, renderIcon: () => <LocationIcon /> },
+  ];
 
   return (
     <div>
@@ -48,13 +82,8 @@ export default function AnimalDetailAnimation({ animal, photos }) {
       </section>
 
       {/* FICHA TÉCNICA (ANIMACIÓN EN CASCADA / SCROLL TRIGGER) */}
-      <section className="py-16 container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-        {[
-          { label: "Dieta", value: animal.diet, icon: "🥩" },
-          { label: "Estado", value: animal.conservation_status, icon: "⚠️" },
-          { label: "Peso Promedio", value: animal.weight, icon: "⚖️" },
-          { label: "Ubicación", value: animal.location, icon: "🌍" },
-        ].map((item, index) => (
+      <section className="py-16 container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {specItems.map((item, index) => (
           <motion.div
             key={item.label}
             initial={{ opacity: 0, y: 40 }}
@@ -63,10 +92,13 @@ export default function AnimalDetailAnimation({ animal, photos }) {
             transition={{ duration: 0.6, delay: index * 0.15, ease: appleEase }}
             className="bg-white p-6 rounded-lg shadow-md border border-safari-olive/10 flex items-center gap-4 hover:shadow-lg transition-shadow"
           >
-            <span className="text-3xl">{item.icon}</span>
+            {/* Contenedor circular estilizado para suavizar los iconos */}
+            <div className="w-12 h-12 bg-safari-sand/50 rounded-full flex items-center justify-center shrink-0">
+              {item.renderIcon()}
+            </div>
             <div>
               <p className="text-xs uppercase tracking-wider font-mono text-safari-dark/60">{item.label}</p>
-              <p className="text-lg font-bold text-safari-olive">{item.value || "No especificado"}</p>
+              <p className="text-lg font-bold text-safari-olive leading-tight">{item.value || "No especificado"}</p>
             </div>
           </motion.div>
         ))}

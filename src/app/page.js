@@ -58,8 +58,8 @@ export default async function Home() {
 
       {/* 4. Footer Minimalista */}
       <footer className="bg-[#2C221E] text-[#F4EBD0] py-12 px-6 text-center z-20 relative">
-        <h2 className="text-3xl font-serif font-black tracking-widest mb-4">SAFARI<span className="text-[#D35400]">.</span></h2>
-        <p className="font-mono text-xs opacity-50 uppercase tracking-widest">© 2026 Reserva Natural Digital. Todos los derechos reservados.</p>
+        <h2 className="text-3xl font-serif font-black tracking-widest mb-4">Zoologico Nacional<span className="text-[#D35400]">.</span></h2>
+        <p className="font-mono text-xs opacity-50 uppercase tracking-widest">© 2026 Grupo 6 - Taller de Programacion II. Todos los derechos reservados.</p>
       </footer>
     </main>
   );
